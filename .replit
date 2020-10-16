@@ -1,0 +1,2 @@
+language = "java10"
+run = "export CLASSPATH=\"$PWD/lib/core.jar:$PWD/build/:$PWD/src/\" && javac -d build src/Sketch.java && java Sketch;"
