@@ -7,6 +7,7 @@ class Ball {
     private int col;
     private float speedY;
     private float speedX;
+    private int borderCor;
 
     /**
      * The default constructor generates random values for most of the instance
@@ -17,6 +18,9 @@ class Ball {
         diameter = s.random(50, 150); // random diameter between 50 and 150
         x = s.random(diameter / 2, s.width - diameter / 2);
         y = s.random(diameter / 2, s.height - diameter / 2);
+        col = s.randomColor(false);
+        speedY = s.random(5, 10);
+        speedX = s.random(5, 10);
 
         /*
          * SUMMATIVE REQUIRED use the randomColor() method in the sketch to set default
@@ -30,9 +34,35 @@ class Ball {
     }
 
     /** This constructor lets you specify all of the ball instance variables */
-    public Ball(Sketch s, float X, float Y, float ballDiam, int ballColor, float sx, float sy) {
+    public Ball(Sketch sketch, float ballDiam, float X, float Y,  int ballColor, float sx, float sy, int ballBorder) {
+        s = sketch;
+        x = X;
+        y = Y;
+        diameter = ballDiam;
+        col = ballColor;
+        speedX = sx;
+        speedY = sy;
+        borderCor = ballBorder;
+
         /* SUMMATIVE REQUIRED Fill out this constructor */
     }
+    public float getRadius() {
+        return diameter / 2;
+    }
+    public void stop() {
+        speedY = 0;
+        speedX = 0;
+    }
+
+    public void start() {
+        col = s.randomColor(false);
+        speedY = s.random(5, 10);
+        speedX = s.random(5, 10);
+    }
+    public float getDistance() {
+        return (float) Math.sqrt(((x - s.mouseX) * (x-s.mouseX)) - ((y - s.mouseY) * (y - s.mouseY)));
+    }
+
 
     /*
      * SUMMATIVE REQUIRED Add a method called `getRadius()` that returns a float
@@ -55,7 +85,7 @@ class Ball {
          * the border color to make it show up. You will need to make other changes too.
          */
 
-        s.stroke(col);
+        s.stroke(borderCor);
         s.fill(col);
         s.ellipse(x, y, diameter, diameter);
     }
@@ -75,3 +105,4 @@ class Ball {
         y += speedY;
     }
 }
+//Made by Malfinator in collaboration with G r i s w o l d, creating java programs which increase my self-esteem since 2020
